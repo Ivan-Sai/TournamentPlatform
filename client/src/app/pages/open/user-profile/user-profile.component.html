@@ -1,0 +1,56 @@
+
+<div class="flex flex-col relative items-center" style="min-height: calc(100vh - 5rem);
+                                             background: rgb(2,0,36);
+                                             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(3,56,91,1) 81%);">
+  <i *ngIf="!isLoaded" class="text-cyan-500 text-7xl absolute left-50 top-48 fa-solid fa-spinner fa-spin"></i>
+
+
+  <div class="flex w-5/6 h-56 items-center justify-center ">
+    <div class="flex items-center">
+      <img (click)="changeAvatar()" class="rounded-2xl" [class.hover:border-amber-300] ="isOwner" [class.cursor-pointer] ="isOwner" [class.hover:border-2] ="isOwner"  style="height: 80px; width: 80px;" *ngIf="isHasImage" [src]="imageUrl" alt="">
+      <img (click)="changeAvatar()" [class.hover:border-amber-300] ="isOwner" [class.cursor-pointer] ="isOwner"  [class.hover:border-2] ="isOwner"  *ngIf="!isHasImage" class="rounded-2xl" style="height: 80px; width: 80px;" src="data:image/png;base64,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" alt="">
+      <p class="text-cyan-50 font-semibold ml-3 text-2xl ">{{userData?.username}}</p>
+    </div>
+  </div>
+  <ng-container *ngIf="teams$ | async as teams">
+    <div class="lg:w-3/6 md:w-3/5 w-4/5 h-96 flex relative flex-col bg-cyan-100" style="overflow-y: auto;">
+      <i *ngIf="isOwner" (click)="redirectToPage('teams/create')" title="Create new team" class="cursor-pointer fa-solid fa-plus absolute right-5 top-6 text-2xl"></i>
+      <p *ngIf="isOwner" class="flex pb-3 justify-center text-4xl text-center font font-semibold mt-3 border-b-2 border-cyan-800">Your Teams</p>
+      <p *ngIf="!isOwner" class="flex pb-3 justify-center text-4xl text-center font font-semibold mt-3 border-b-2 border-cyan-800">Teams</p>
+      <div class="flex flex-col h-full w-full" style="max-height: 100%; overflow-y: auto;">
+        <div class="flex relative cursor-pointer items-center justify-center w-full h-1/5 bg-sky-600 hover:bg-sky-800 border-2 border-b-cyan-900" *ngFor="let team of teams" (click)="redirectToPage('teams/' + team.id)">
+          <div class="w-50 pr-4 h-full items-center flex justify-end"><img class="rounded-2xl" style="width: 50px; height: 50px" [src]="getLogo(team.id)" alt=""></div>
+          <p class="text-cyan-50 pl-4  items-center text-2xl w-50 h-full flex justify-start ">{{team.name}}</p>
+          <i *ngIf="isOwner" (click)="openLeaveTeamWindow(team.name, team.id); $event.stopPropagation()" class="absolute right-3 top-3 text-red-500 text-2xl fa-solid fa-person-walking-arrow-right"></i>
+        </div>
+
+      </div>
+    </div>
+
+  </ng-container>
+
+
+
+
+
+  <div *ngIf="avatarWindowOpen" class="z-2 left-0 top-0 absolute w-full h-full flex items-center justify-center " style="background-color: rgba(100,100,100,0.4)">
+    <div class="flex bg-white rounded w-2/6 h-50 flex-col">
+      <i class="fa-solid fa-x text-red-700 m-4 font-bold text-4xl cursor-pointer" (click)="(avatarWindowOpen = false)"></i>
+      <form (ngSubmit)="submitImage()" class="flex flex-col w-4/5 items-center mt-5 self-center">
+        <input (change)="onImageUpload($event)" class="form-control border-blue-300" type="file">
+        <button [disabled]="uploadImage == undefined" type="submit" class="btn btn-primary bg-sky-700 mt-10" >Set image</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="leaveTeamWindowOpen" class="z-2 left-0 top-0 absolute w-full h-full flex items-center justify-center " style="background-color: rgba(100,100,100,0.4)">
+    <div class="flex bg-white rounded w-2/6 h-50 flex-col ">
+      <i class="fa-solid fa-x text-red-700 m-4 font-bold text-4xl cursor-pointer" (click)="closeLeaveWindow()"></i>
+      <div class="flex flex-col items-center justify-center mt-10">
+        <p class="text-xl text-center">Are you sure you want to leave from "{{leaveTeamName}}"?</p>
+        <button (click)="leaveTeam()" type="button" class="btn btn-danger bg-red-500 w-3/6 self-center text-center mt-10">Leave</button>
+      </div>
+    </div>
+  </div>
+
+</div>

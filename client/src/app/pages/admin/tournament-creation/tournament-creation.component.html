@@ -1,0 +1,52 @@
+<ng-container>
+  <div class="flex flex-col items-center w-full bg-sky-950 justify-center" style="min-height: calc(100vh - 5rem)">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="my-4 flex flex-col bg-white rounded w-4/12 p-4">
+      <div class="mb-3">
+        <label for="name" class="form-label">Tournament name</label>
+        <input formControlName="name" max="50" type="text" class="border-blue-300 form-control" id="name"
+               aria-describedby="name">
+      </div>
+      <div class="mb-3">
+        <label for="discipline" class="form-label">Tournament discipline</label>
+        <select id="discipline" formControlName="discipline" class="form-select border-blue-300"
+                aria-label="Discipline">
+          <option [value]="'Dota 2'" [selected]="form.value['discipline'] === 'Dota 2'">Dota 2</option>
+          <option [value]="'Valorant'" [selected]="form.value['discipline'] === 'Valorant'">Valorant</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="minTeams" class="form-label">Minimum teams in tournament</label>
+        <input formControlName="minTeams" type="number" class="border-blue-300 form-control" id="minTeams"
+               aria-describedby="maxTeams">
+        <p *ngIf="!minCorrect" class="text-danger">*Min teams must be between 2 and 128</p>
+      </div>
+      <div class="mb-3">
+        <label for="maxTeams" class="form-label">Maximum teams in tournament</label>
+        <input formControlName="maxTeams" min="2" type="number" class="border-blue-300 form-control" id="maxTeams"
+               aria-describedby="maxTeams">
+        <p class="text-danger" *ngIf="!maxMin">*Maximum teams must be equal or bigger then minimum</p>
+        <p *ngIf="!maxCorrect" class="text-danger">*Max teams must be between 2 and 128</p>
+      </div>
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start date</label>
+        <input formControlName="startDate" type="datetime-local" class="border-blue-300 form-control" id="startDate"
+               aria-describedby="maxTeams">
+        <p *ngIf="!dateBefore" class="text-danger">*Min start date {{minDate}}</p>
+        <p *ngIf="!dateAfter" class="text-danger">*Max start date {{maxDate}}</p>
+      </div>
+      <div class="mb-3">
+        <label for="tournamentType" class="form-label">Tournament type</label>
+        <select id="tournamentType" formControlName="tournamentType" class="form-select border-blue-300"
+                aria-label="tournamentType">
+          <option [value]="'TYPE_5VS5'"
+                  [selected]="form.get('tournamentType')?.value === 'SINGLE_ELIMINATION'">5vs5
+          </option>
+          <option [value]="'TYPE_1VS1'">1vs1</option>
+        </select>
+      </div>
+      <p class="text-danger" *ngIf="errorMessage === 'Token has expired'">*Token has expired, you need to resigning</p>
+      <button type="submit" class="btn btn-primary bg-sky-700" [disabled]="form.invalid || !dateBefore || !dateAfter || !minCorrect || !maxCorrect || !maxMin ">Submit</button>
+    </form>
+  </div>
+</ng-container>

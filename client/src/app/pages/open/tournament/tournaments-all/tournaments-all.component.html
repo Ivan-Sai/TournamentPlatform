@@ -1,0 +1,25 @@
+<ng-container>
+  <div class="flex flex-col" style="min-height: calc(100vh - 5rem);
+                                             background: rgb(2,0,36);
+                                             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(3,56,91,1) 81%);">
+    <div class="flex mt-5">
+      <i class="fa-solid mx-5 fa-trophy text-5xl text-cyan-500" style="margin-right: 5%"></i>
+      <p class="text-4xl text-blue-200 font-bold">Tournaments</p>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <i title="Refresh" class="fa-solid fa-arrows-rotate mr-5 text-lg cursor-pointer text-cyan-500" (click)="refreshFilters('tournaments')"></i>
+      <select [(ngModel)]="selectedFilter" (change)="handleSelection()">
+        <option [selected]="isRefresh" value="all">All</option>
+        <option value="upcoming">Upcoming</option>
+        <option value="past">Past</option>
+      </select>
+      <select [(ngModel)]="selectedDiscipline" (change)="handleSelection()">
+        <option [selected]="isRefresh" value="all">All</option>
+        <option value="dota">Dota 2</option>
+        <option value="Valorant">Valorant</option>
+      </select>
+    </div>
+    <app-tournament-all-list></app-tournament-all-list>
+  </div>
+</ng-container>

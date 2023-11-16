@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { TournamentCreationComponent } from \"./tournament-creation/tournament-creation.component\";\nexport const ADMIN_ROUTES = [{\n  path: 'tournament',\n  component: TournamentCreationComponent\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

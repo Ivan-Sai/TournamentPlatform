@@ -1,0 +1,46 @@
+<ng-container *ngIf="bracket">
+  <div style="height: 75vh" class="max-w-5/6 w-5/6 overflow-x-scroll overflow-y-scroll">
+    <div [ngStyle]="{'width': 30 * (bracket.stages.length + 1) + 'vw', 'height': 5 * (bracket.stages[0].matches.length) + 'rem'}" class="self-center flex justify-around items-center border-2 border-blue-700" style=" min-height: 75vh; min-width: 90vw">
+      <div class="flex flex-col items-center justify-around" style="min-height: 75vh; width: 30vw" *ngFor="let stage of bracket.stages">
+        <div class="flex flex-col w-5/6 h-24 bg-sky-400" *ngFor="let match of stage.matches">
+          <div class="flex flex-col w-full h-50 relative cursor-pointer hover:bg-sky-600" (click)="navigateToTeamPage(match.team1.id)" *ngIf="match.team1">
+            <i (click)="stopPropagation($event);teamWon(match.team1.id, match.matchId, bracket.bracketId, stage.stageId)" *ngIf="role == 'ADMIN' && userId == adminId" class="fa-solid cursor-pointer fa-arrow-right absolute right-2 top-2 text-xl"></i>
+            <div class="flex w-full h-full justify-between items-center pl-3">
+              <div class="flex h-full items-center justify-start pl-3">
+                <img class="rounded-3xl mr-3" *ngIf="isHasLogoMap[match.team1.id]" [src]="getLogo(match.team1.id)" style="width: 40px; height: 40px" alt="">
+                <p class="text-xl">{{ match.team1.name }}</p>
+              </div>
+              <p *ngIf="match.winnerId != 0 && match.winnerId == match.team1.id" class="text-green-700 text-2xl mr-8">W</p>
+              <p *ngIf="match.winnerId != 0 && match.winnerId != match.team1.id" class="text-red-500 text-2xl mr-8">L</p>
+            </div>
+          </div>
+          <div class="flex flex-col w-full h-50 relative" *ngIf="!match.team1"></div>
+          <div class="border-b border-gray-500"></div>
+          <div class="flex flex-col w-full h-50 relative cursor-pointer hover:bg-sky-600" (click)="navigateToTeamPage(match.team2.id)" *ngIf="match.team2">
+            <i (click)="stopPropagation($event);teamWon(match.team2.id, match.matchId, bracket.bracketId, stage.stageId); $event.stopPropagation()" *ngIf="role == 'ADMIN' && userId == adminId" class="fa-solid cursor-pointer fa-arrow-right absolute right-2 top-2 text-xl"></i>
+            <div class="flex w-full h-full justify-between items-center pl-3">
+              <div class="flex h-full items-center justify-start pl-3">
+                <img class="rounded-3xl mr-3" *ngIf="isHasLogoMap[match.team2.id]" [src]="getLogo(match.team2.id)" style="width: 40px; height: 40px"  alt="">
+                <p class="text-xl">{{ match.team2.name }}</p>
+              </div>
+              <p *ngIf="match.winnerId != 0 && match.winnerId == match.team2.id" class="text-green-700 text-2xl mr-8">W</p>
+              <p *ngIf="match.winnerId != 0 && match.winnerId != match.team2.id" class="text-red-500 text-2xl mr-8">L</p>
+            </div>
+          </div>
+          <div class="flex flex-col w-full h-50 relative" *ngIf="!match.team2">
+
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col w-2/5 items-center justify-center relative" style="min-height: 75vh">
+        <i class="fa-solid fa-trophy text-9xl text-amber-200 absolute top-24"></i>
+        <div *ngIf="winnerId != 0" (click)="navigateToTeamPage(winner?.id)" class="flex flex-col w-80 h-10 bg-sky-400 cursor-pointer items-center justify-center text-xl " [class.hover:bg-sky-600] = "winnerId != 0">
+          <p *ngIf="winnerId != 0">{{winner?.name}}</p>
+        </div>
+        <div *ngIf="winnerId == 0" class="flex flex-col w-80 h-10 bg-sky-400 cursor-pointer items-center justify-center text-xl " [class.hover:bg-sky-600] = "winnerId != 0" [class.cursor-pointer] = "winnerId != 0">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

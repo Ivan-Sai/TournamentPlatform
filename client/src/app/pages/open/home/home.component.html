@@ -1,0 +1,14 @@
+<ng-container>
+  <div style="height: calc(100vh - 5rem);"
+       class="flex items-center justify-center home cont w-100 bg-no-repeat bg-cover bg-[url(https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2021/10/20/ribc5cuknakwouvwqjpx/team-spirit-ti10-winner)]">
+    <div class="flex bg-white flex-col w-5/12 h-4/6 rounded-2xl items-center justify-evenly p-3">
+      <h1 class="font-bold text-5xl ">Welcome!</h1>
+      <p>There you can create a team, play tournaments and become champions!</p>
+      <span *ngIf="!accessToken">
+     <button class="btn text-yellow-200 bg-indigo-500" (click)="goToPage('/signup')">Sign Up</button>
+     <button class="btn text-yellow-200 bg-amber-700" (click)="goToPage('/signin')">Sign In</button>
+   </span>
+    </div>
+  </div>
+</ng-container>
+

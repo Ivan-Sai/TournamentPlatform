@@ -1,0 +1,36 @@
+.noLogo {
+  background: grey;
+}
+.circle-container {
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+}
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.inner_fill {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  height: 85%;
+  width: 85%;
+  border-radius: 50%;
+}
+.img_cont{
+  background-size: 200% !important;
+}
+.tournament_cont .img_cont {
+  transition: background-size 0.4s;
+}
+.tournament_cont:hover .img_cont{
+  background-size: 230% !important;
+}
+

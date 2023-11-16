@@ -1,0 +1,26 @@
+<div class="flex lg:justify-between h-12 align-items-center border-b-2 md:justify-evenly justify-evenly"
+     style="height: 5rem; background-color: #153362">
+  <a class="font-bold text-lg mx-5 cursor-pointer text-yellow-200" (click)="goToPage('/')">BestCup</a>
+  <div class="w-5/12 flex align-items-center justify-evenly ">
+    <p class="cursor-pointer text-blue-50 hover:text-cyan-500 text-xl" (click)="goToPage('tournaments?filter=upcoming')">Tournaments</p>
+    <div *ngIf="!accessToken  " class="flex w-4/12 justify-between">
+      <button class="btn text-yellow-200 bg-indigo-500" (click)="goToPage('/signup')">Sign Up</button>
+      <button class="btn text-yellow-200 bg-amber-700" (click)="goToPage('/signin')">Sign In</button>
+    </div>
+<!--    <div *ngIf="accessToken">-->
+<!--      <button class="btn btn-danger" (click)="logout()">Log out</button>-->
+<!--    </div>-->
+    <div class="">
+      <button *ngIf="username" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{username}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item cursor-pointer" (click)="goToPage('users/'+ userId)">Profile</a></li>
+        <li><a class="dropdown-item cursor-pointer" (click)="logout()">Log out</a></li>
+        <li *ngIf="role === 'ADMIN'">
+          <button class="dropdown-item" (click)="goToPage('admin/tournament')">Create tournament</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

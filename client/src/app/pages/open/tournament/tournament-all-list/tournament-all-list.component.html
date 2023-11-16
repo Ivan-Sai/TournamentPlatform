@@ -1,0 +1,23 @@
+<ng-container *ngIf="tournaments$ | async as tournaments">
+<div class="mt-5 grid mx-5 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10" [ngStyle] ="{'min-height' : 'calc(300px * '+tournaments.length/3}">
+  <div (click)="redirectToPage('tournaments/' + tournament.id)" class="cursor-pointer relative tournament_cont flex flex-col h-3/4 rounded-xl hover:shadow-xl hover:shadow-blue-300 hover:border" *ngFor="let tournament of tournaments.reverse()">
+    <img *ngIf="tournament.discipline == 'Dota 2'" class="absolute left-3 top-3" src="https://cdn.gogeticon.net/files/2481207/fc0ad6ea2b8d20c902cdf90d27814134.png" width="40" height="40" alt="">
+    <img *ngIf="tournament.discipline == 'Valorant'" class="absolute left-3 top-3" src="https://cdn2.steamgriddb.com/file/sgdb-cdn/icon/191c62d342811d1a0d3d0528ec35cd2d/32/256x256.png" width="40" height="40" alt="">
+    <div class="img_cont w-full rounded-t-xl bg-no-repeat" style="background-position: center; height: 25vh" [class.noLogo] ="!isHasLogoMap[tournament.id]" [ngStyle]="{'background-image': 'url(' + getLogo(tournament.id) + ')'}"></div>
+    <div class="w-full bg-sky-900 rounded-b-xl relative flex-col flex justify-between" style="height: 20vh">
+      <div class="flex flex-row mx-3 justify-between mt-2">
+        <p class="text-2xl text-white">{{tournament.discipline + ' - ' + tournament.name }}</p>
+        <div class="circle-container">
+          <div class="fill" [ngStyle]="{'background': 'conic-gradient(rgb(21, 205, 57) ' + (tournament.currTeams/(tournament.maxTeams/100)) + '%, transparent 0)'}"></div>
+          <div class="absolute bg-sky-800 inner_fill"></div>
+        </div>
+      </div>
+      <div class="mb-2 flex flex-row mx-3 justify-between text-lg text-white">
+        <p class="">{{toLocalDate(tournament.startDate)}}</p>
+        <p >{{tournament.currTeams + ' - ' + tournament.maxTeams}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</ng-container>
